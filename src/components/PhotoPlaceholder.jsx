@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Camera } from 'lucide-react';
+import { assetUrl } from '../utils/assets';
 
 /**
  * Soft clinical photo frame.
@@ -17,13 +18,14 @@ export default function PhotoPlaceholder({
 }) {
   const [failed, setFailed] = useState(false);
   const aspectClass = aspect === 'square' ? 'aspect-square' : 'aspect-[4/5]';
-  const showImage = Boolean(src) && !failed;
+  const resolved = assetUrl(src);
+  const showImage = Boolean(resolved) && !failed;
 
   if (showImage) {
     return (
       <div className={`overflow-hidden rounded-[1.6rem] ${aspectClass} ${className}`}>
         <img
-          src={src}
+          src={resolved}
           alt={alt}
           className="h-full w-full object-cover"
           style={{ objectPosition }}

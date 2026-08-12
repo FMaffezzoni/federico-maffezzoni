@@ -57,6 +57,28 @@ export async function changePassword(currentPassword, newPassword) {
   return data;
 }
 
+export async function forgotPassword(email) {
+  const res = await fetch(`${API_BASE}/api/admin/forgot-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.message || 'Request failed');
+  return data;
+}
+
+export async function resetPasswordWithToken(token, newPassword) {
+  const res = await fetch(`${API_BASE}/api/admin/reset-password`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token, newPassword })
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.message || 'Reset failed');
+  return data;
+}
+
 export async function uploadFile(file) {
   const form = new FormData();
   form.append('file', file);

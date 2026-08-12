@@ -11,6 +11,8 @@ import Contact from './pages/Contact';
 import { AdminAuthProvider, RequireAdmin } from './admin/AdminAuth';
 import AdminLayout from './admin/AdminLayout';
 import AdminLogin from './admin/AdminLogin';
+import AdminForgotPassword from './admin/AdminForgotPassword';
+import AdminResetPassword from './admin/AdminResetPassword';
 import Overview from './admin/pages/Overview';
 import ProfileEditor from './admin/pages/ProfileEditor';
 import HomeEditor from './admin/pages/HomeEditor';
@@ -33,6 +35,8 @@ export default function App() {
           <AdminAuthProvider>
             <Routes>
               <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
+              <Route path="/admin/reset-password" element={<AdminResetPassword />} />
               <Route
                 path="/admin"
                 element={

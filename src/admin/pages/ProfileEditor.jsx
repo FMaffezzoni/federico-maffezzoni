@@ -1,5 +1,6 @@
 import { useDraft } from '../DraftContext';
 import { uploadFile } from '../../content/api';
+import { assetUrl } from '../../utils/assets';
 import { BilingualField, Field, SectionCard, TextInput } from '../components/fields';
 
 export default function ProfileEditor() {
@@ -70,7 +71,7 @@ export default function ProfileEditor() {
               />
               {profile[key] && (
                 <img
-                  src={profile[key]}
+                  src={assetUrl(profile[key])}
                   alt=""
                   className="h-40 w-full rounded-xl object-cover object-top"
                 />

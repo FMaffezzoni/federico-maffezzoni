@@ -34,13 +34,26 @@ export async function resetContent() {
 }
 
 export async function loginAdmin(username, password) {
-  const res = await fetch(`${API_BASE}/api/admin/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
-  });
+  const base = (API_BASE || '').replace(/\/$/, '');
+  if (!base && import.meta.env.PROD) {
+    throw new Error(
+      'API URL is not configured. Set GitHub Actions variable VITE_API_URL to your Render URL and redeploy Pages.'
+    );
+  }
+  let res;
+  try {
+    res = await fetch(`${base}/api/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+  } catch {
+    throw new Error(
+      'Cannot reach the API. Check VITE_API_URL and that the Render service is awake (open /api/health first).'
+    );
+  }
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.message || 'Login failed');
+  if (!res.ok) throw new Error(data.message || `Login failed (${res.status})`);
   localStorage.setItem('fm-admin-token', data.token);
   localStorage.setItem('fm-admin-user', data.username);
   return data;

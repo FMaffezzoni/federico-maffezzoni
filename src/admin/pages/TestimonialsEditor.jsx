@@ -1,5 +1,6 @@
 import { uid } from '../../content/defaultContent';
 import { uploadFile } from '../../content/api';
+import { assetUrl } from '../../utils/assets';
 import { useDraft } from '../DraftContext';
 import {
   AddButton,
@@ -140,7 +141,7 @@ export default function TestimonialsEditor() {
               </div>
               {item.image ? (
                 <img
-                  src={item.image}
+                  src={assetUrl(item.image)}
                   alt=""
                   className="h-40 w-full rounded-xl border border-mist-200 object-cover object-top md:h-full"
                 />

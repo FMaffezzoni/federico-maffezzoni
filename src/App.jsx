@@ -28,7 +28,7 @@ export default function App() {
   return (
     <ContentProvider>
       <LanguageProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <AdminAuthProvider>
             <Routes>
               <Route path="/admin/login" element={<AdminLogin />} />

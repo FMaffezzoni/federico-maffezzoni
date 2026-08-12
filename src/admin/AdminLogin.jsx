@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { loginAdmin } from '../content/api';
 import { useAdminAuth } from './AdminAuth';
 import { Field, TextInput } from './components/fields';
@@ -64,6 +64,12 @@ export default function AdminLogin() {
             {loading ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
+
+        <p className="mt-6 text-center text-sm text-mist-600">
+          <Link to="/admin/forgot-password" className="font-semibold text-mist-800 hover:underline">
+            Forgot password?
+          </Link>
+        </p>
       </div>
     </div>
   );

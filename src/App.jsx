@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ContentProvider } from './content/ContentContext';
 import { LanguageProvider } from './i18n/LanguageContext';
+import { routerBasename } from './utils/routerBasename';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -28,7 +29,7 @@ export default function App() {
   return (
     <ContentProvider>
       <LanguageProvider>
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <BrowserRouter basename={routerBasename}>
           <AdminAuthProvider>
             <Routes>
               <Route path="/admin/login" element={<AdminLogin />} />

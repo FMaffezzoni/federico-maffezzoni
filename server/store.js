@@ -50,18 +50,39 @@ export function resetContent() {
   return defaults;
 }
 
+function buildAuthFromEnv() {
+  const password = process.env.ADMIN_PASSWORD || 'FedericoAdmin2026!';
+  const username = process.env.ADMIN_USERNAME || 'admin';
+  return {
+    username,
+    passwordHash: bcrypt.hashSync(password, 10),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+}
+
 export function readAuth() {
   ensureDir();
   if (!fs.existsSync(AUTH_FILE)) {
-    const password = process.env.ADMIN_PASSWORD || 'FedericoAdmin2026!';
-    const username = process.env.ADMIN_USERNAME || 'admin';
-    const hash = bcrypt.hashSync(password, 10);
-    const auth = { username, passwordHash: hash, createdAt: new Date().toISOString() };
+    const auth = buildAuthFromEnv();
     fs.writeFileSync(AUTH_FILE, JSON.stringify(auth, null, 2));
-    console.log(`Admin seeded → username: ${username}`);
+    console.log(`Admin seeded → username: ${auth.username}`);
     return auth;
   }
   return JSON.parse(fs.readFileSync(AUTH_FILE, 'utf8'));
+}
+
+/** One-time reset for hosts without Shell (e.g. Render Free). Set RESET_ADMIN=true then redeploy. */
+export function reseedAuthFromEnvIfRequested() {
+  if (process.env.RESET_ADMIN !== 'true' && process.env.RESET_ADMIN !== '1') {
+    return readAuth();
+  }
+  ensureDir();
+  const auth = buildAuthFromEnv();
+  fs.writeFileSync(AUTH_FILE, JSON.stringify(auth, null, 2));
+  console.log(`Admin RESET from env → username: ${auth.username}`);
+  console.log('Turn off RESET_ADMIN in Render after you can log in.');
+  return auth;
 }
 
 export function writeAuth(auth) {

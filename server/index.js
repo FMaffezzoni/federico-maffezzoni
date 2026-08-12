@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { readContent, writeContent, resetContent, readAuth, writeAuth } from './store.js';
+import { readContent, writeContent, resetContent, readAuth, writeAuth, reseedAuthFromEnvIfRequested } from './store.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '.env') });
@@ -118,7 +118,7 @@ app.post('/api/admin/upload', auth, upload.single('file'), (req, res) => {
 });
 
 app.listen(PORT, () => {
-  readAuth();
+  reseedAuthFromEnvIfRequested();
   readContent();
   console.log(`Federico CMS API running on http://localhost:${PORT}`);
 });

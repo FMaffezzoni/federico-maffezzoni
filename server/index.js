@@ -8,6 +8,13 @@ import bcrypt from 'bcryptjs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { readContent, writeContent, resetContent, readAuth, writeAuth, reseedAuthFromEnvIfRequested } from './store.js';
+import {
+  buildResetUrl,
+  createResetToken,
+  matchesResetToken,
+  sendPasswordResetEmail,
+  smtpConfigured
+} from './mail.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '.env') });
@@ -107,8 +114,91 @@ app.post('/api/admin/password', auth, (req, res) => {
   }
   authData.passwordHash = bcrypt.hashSync(newPassword, 10);
   authData.updatedAt = new Date().toISOString();
+  delete authData.passwordResetTokenHash;
+  delete authData.passwordResetExpires;
   writeAuth(authData);
   res.json({ ok: true });
+});
+
+const GENERIC_FORGOT_MSG =
+  'If that email matches an admin account, a reset link will be sent (or logged on the server).';
+
+app.post('/api/admin/forgot-password', async (req, res) => {
+  try {
+    const email = String(req.body?.email || '')
+      .trim()
+      .toLowerCase();
+    if (!email || !email.includes('@')) {
+      return res.status(400).json({ message: 'A valid email is required' });
+    }
+
+    const authData = readAuth();
+    const content = readContent();
+    const allowedEmails = [
+      process.env.ADMIN_EMAIL,
+      content?.profile?.email
+    ]
+      .filter(Boolean)
+      .map((e) => String(e).trim().toLowerCase());
+
+    const emailOk = allowedEmails.includes(email);
+    if (!emailOk) {
+      // Same response timing / message — do not reveal whether email exists
+      return res.json({ ok: true, message: GENERIC_FORGOT_MSG });
+    }
+
+    const { token, tokenHash, expiresAt } = createResetToken();
+    authData.passwordResetTokenHash = tokenHash;
+    authData.passwordResetExpires = expiresAt;
+    authData.updatedAt = new Date().toISOString();
+    writeAuth(authData);
+
+    const resetUrl = buildResetUrl(token);
+    console.log(`[password-reset] link for ${email} (expires ${expiresAt}): ${resetUrl}`);
+
+    let emailed = false;
+    if (smtpConfigured()) {
+      await sendPasswordResetEmail({ to: email, resetUrl });
+      emailed = true;
+    }
+
+    const payload = {
+      ok: true,
+      message: emailed
+        ? 'If that email matches an admin account, a reset link has been sent.'
+        : GENERIC_FORGOT_MSG,
+      emailed
+    };
+
+    // Optional helper when SMTP is not set yet (enable temporarily on Render)
+    if (process.env.RETURN_RESET_LINK === 'true' || process.env.RETURN_RESET_LINK === '1') {
+      payload.resetUrl = resetUrl;
+    }
+
+    res.json(payload);
+  } catch (err) {
+    console.error('[password-reset]', err);
+    res.status(500).json({ message: err.message || 'Could not start password reset' });
+  }
+});
+
+app.post('/api/admin/reset-password', (req, res) => {
+  const { token, newPassword } = req.body || {};
+  if (!token || !newPassword || String(newPassword).length < 8) {
+    return res.status(400).json({ message: 'Valid token and a new password (min 8 characters) are required' });
+  }
+
+  const authData = readAuth();
+  if (!matchesResetToken(authData, token)) {
+    return res.status(400).json({ message: 'Invalid or expired reset link. Request a new one.' });
+  }
+
+  authData.passwordHash = bcrypt.hashSync(String(newPassword), 10);
+  authData.updatedAt = new Date().toISOString();
+  delete authData.passwordResetTokenHash;
+  delete authData.passwordResetExpires;
+  writeAuth(authData);
+  res.json({ ok: true, message: 'Password updated. You can sign in now.' });
 });
 
 app.post('/api/admin/upload', auth, upload.single('file'), (req, res) => {

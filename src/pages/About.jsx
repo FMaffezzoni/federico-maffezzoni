@@ -3,10 +3,11 @@ import PageHero from '../components/PageHero';
 import PhotoPlaceholder from '../components/PhotoPlaceholder';
 import BookButton from '../components/BookButton';
 import { useLanguage } from '../i18n/LanguageContext';
+import { assetUrl } from '../utils/assets';
 
 export default function About() {
   const { t } = useLanguage();
-  const cvUrl = t.meta?.cvUrl || '/CV_Federico_Maffezzoni.pdf';
+  const cvUrl = assetUrl(t.meta?.cvUrl || '/CV_Federico_Maffezzoni.pdf');
 
   return (
     <>

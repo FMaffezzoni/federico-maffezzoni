@@ -30,9 +30,15 @@ jobs:
       - name: Build for GitHub Pages
         env:
           GITHUB_PAGES: 'true'
-          # Set this in repo Settings → Secrets and variables → Actions → Variables
-          VITE_API_URL: ${{ vars.VITE_API_URL }}
-        run: npm run build
+          # Prefer Actions → Variables; Secrets also accepted as fallback
+          VITE_API_URL: ${{ vars.VITE_API_URL || secrets.VITE_API_URL }}
+        run: |
+          if [ -z "$VITE_API_URL" ]; then
+            echo "::error::VITE_API_URL is empty. Add it under Settings → Secrets and variables → Actions → Variables (e.g. https://your-app.onrender.com)"
+            exit 1
+          fi
+          echo "Building with API: $VITE_API_URL"
+          npm run build
 
       # React Router SPA: refresh on /about etc. must serve index.html
       - run: node scripts/make-404.mjs

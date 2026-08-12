@@ -1,5 +1,6 @@
 import { translations } from '../i18n/translations.js';
 import { MEDIA_LINKS, MIODOTTORE_URL } from '../constants/links.js';
+import { assetUrl } from '../utils/assets.js';
 
 const uid = () => `id_${Math.random().toString(36).slice(2, 10)}`;
 
@@ -368,7 +369,7 @@ export function contentToLocale(content, lang = 'it') {
         .filter((item) => item.active !== false && item.image)
         .map((item) => ({
           id: item.id,
-          image: item.image,
+          image: assetUrl(item.image),
           alt: L(item.alt) || 'MioDottore review'
         }))
     },
@@ -378,9 +379,9 @@ export function contentToLocale(content, lang = 'it') {
     },
     meta: {
       bookingUrl: content.profile.bookingUrl,
-      photoHome: content.profile.photoHome,
-      photoAbout: content.profile.photoAbout,
-      cvUrl: content.profile.cvUrl || '/CV_Federico_Maffezzoni.pdf'
+      photoHome: assetUrl(content.profile.photoHome),
+      photoAbout: assetUrl(content.profile.photoAbout),
+      cvUrl: assetUrl(content.profile.cvUrl || '/CV_Federico_Maffezzoni.pdf')
     }
   };
 }

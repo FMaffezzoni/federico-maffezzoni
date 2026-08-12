@@ -25,7 +25,7 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci
+      - run: npm install
 
       - name: Build for GitHub Pages
         env:
@@ -34,8 +34,8 @@ jobs:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
         run: npm run build
 
-      # React Router SPA: serve index.html for unknown paths on GitHub Pages
-      - run: cp dist/index.html dist/404.html
+      # React Router SPA: refresh on /about etc. must serve index.html
+      - run: node scripts/make-404.mjs
 
       - uses: actions/upload-pages-artifact@v3
         with:

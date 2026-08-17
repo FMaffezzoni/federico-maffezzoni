@@ -29,6 +29,13 @@ export function readContent() {
       changed = true;
     }
   }
+  stored.nav = stored.nav || {};
+  for (const key of Object.keys(defaults.nav || {})) {
+    if (stored.nav[key] === undefined) {
+      stored.nav[key] = defaults.nav[key];
+      changed = true;
+    }
+  }
   if (changed) {
     stored.updatedAt = new Date().toISOString();
     fs.writeFileSync(CONTENT_FILE, JSON.stringify(stored, null, 2));

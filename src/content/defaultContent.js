@@ -18,14 +18,15 @@ export function buildDefaultContent() {
       email: translations.it.contact.email,
       phone: translations.it.contact.phone,
       bookingUrl: MIODOTTORE_URL,
-      photoHome: '/images/federico.png',
-      photoAbout: '/images/Fede.png',
+      photoHome: '/images/federico.webp',
+      photoAbout: '/images/Fede.webp',
       cvUrl: '/CV_Federico_Maffezzoni.pdf'
     },
     nav: {
       about: { it: translations.it.nav.about, en: translations.en.nav.about },
       services: { it: translations.it.nav.services, en: translations.en.nav.services },
       resources: { it: translations.it.nav.resources, en: translations.en.nav.resources },
+      insights: { it: translations.it.nav.insights, en: translations.en.nav.insights },
       contact: { it: translations.it.nav.contact, en: translations.en.nav.contact }
     },
     cta: {
@@ -190,8 +191,8 @@ export function buildDefaultContent() {
           id: 'review_cl',
           image: '/images/testimonials/review-cl.png',
           alt: {
-            it: 'Recensione MioDottore — paziente CL, 5 stelle',
-            en: 'MioDottore review — patient CL, 5 stars'
+            it: 'Recensione MioDottore — Psicologo Cremona Dott. Federico Maffezzoni',
+            en: 'MioDottore review — Psychologist Cremona Dr. Federico Maffezzoni'
           },
           active: true
         },
@@ -199,8 +200,8 @@ export function buildDefaultContent() {
           id: 'review_sf',
           image: '/images/testimonials/review-sf.png',
           alt: {
-            it: 'Recensione MioDottore — paziente S.F., 5 stelle',
-            en: 'MioDottore review — patient S.F., 5 stars'
+            it: 'Recensione MioDottore — Psicoterapeuta Brescia Dott. Federico Maffezzoni',
+            en: 'MioDottore review — Psychotherapist Brescia Dr. Federico Maffezzoni'
           },
           active: true
         },
@@ -208,8 +209,8 @@ export function buildDefaultContent() {
           id: 'review_carolina',
           image: '/images/testimonials/review-carolina.png',
           alt: {
-            it: 'Recensione MioDottore — Carolina, 5 stelle',
-            en: 'MioDottore review — Carolina, 5 stars'
+            it: 'Recensione MioDottore — Consulenza psicologica online Dott. Maffezzoni',
+            en: 'MioDottore review — Online psychological counselling Dr. Maffezzoni'
           },
           active: true
         },
@@ -217,8 +218,8 @@ export function buildDefaultContent() {
           id: 'review_andrea',
           image: '/images/testimonials/review-andrea.png',
           alt: {
-            it: 'Recensione MioDottore — Andrea, 5 stelle',
-            en: 'MioDottore review — Andrea, 5 stars'
+            it: 'Recensione MioDottore — Psicologo Brescia Poliambulatorio Oberdan',
+            en: 'MioDottore review — Psychologist Brescia Poliambulatorio Oberdan'
           },
           active: true
         },
@@ -226,8 +227,8 @@ export function buildDefaultContent() {
           id: 'review_zc',
           image: '/images/testimonials/review-zc.png',
           alt: {
-            it: 'Recensione MioDottore — Z.C., 5 stelle',
-            en: 'MioDottore review — Z.C., 5 stars'
+            it: 'Recensione MioDottore — Psicoterapeuta Cremona Dott. Federico Maffezzoni',
+            en: 'MioDottore review — Psychotherapist Cremona Dr. Federico Maffezzoni'
           },
           active: true
         },
@@ -235,8 +236,8 @@ export function buildDefaultContent() {
           id: 'review_ben',
           image: '/images/testimonials/review-ben.png',
           alt: {
-            it: 'Recensione MioDottore — Ben, 5 stelle',
-            en: 'MioDottore review — Ben, 5 stars'
+            it: 'Recensione MioDottore — English speaking psychologist Italy',
+            en: 'MioDottore review — English speaking psychologist Italy'
           },
           active: true
         }
@@ -252,6 +253,7 @@ export function buildDefaultContent() {
 /** Flatten CMS content into the shape pages currently expect for one language */
 export function contentToLocale(content, lang = 'it') {
   const L = (obj) => (obj && typeof obj === 'object' ? obj[lang] || obj.it || '' : obj || '');
+  const extra = translations[lang] || translations.it;
 
   return {
     brand: L(content.profile.brand),
@@ -268,7 +270,11 @@ export function contentToLocale(content, lang = 'it') {
       pillars: (content.home.pillars || []).map((p) => ({
         title: L(p.title),
         text: L(p.text)
-      }))
+      })),
+      faqTitle: extra.home.faqTitle,
+      seoCtaServices: extra.home.seoCtaServices,
+      seoCtaInsights: extra.home.seoCtaInsights,
+      seoSections: extra.home.seoSections
     },
     about: {
       title: L(content.about.title),
@@ -297,7 +303,8 @@ export function contentToLocale(content, lang = 'it') {
       note: L(content.services.note),
       items: (content.services.items || [])
         .filter((s) => s.active !== false)
-        .map((s) => ({ name: L(s.name), price: s.price }))
+        .map((s) => ({ name: L(s.name), price: s.price })),
+      catalog: extra.services.catalog
     },
     conditions: {
       title: L(content.conditions.title),
@@ -377,6 +384,8 @@ export function contentToLocale(content, lang = 'it') {
       rights: L(content.footer.rights),
       note: L(content.footer.note)
     },
+    seo: extra.seo,
+    insights: extra.insights,
     meta: {
       bookingUrl: content.profile.bookingUrl,
       photoHome: assetUrl(content.profile.photoHome),

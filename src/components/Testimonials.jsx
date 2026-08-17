@@ -92,8 +92,11 @@ export default function Testimonials() {
                   <img
                     src={item.image}
                     alt={item.alt}
+                    width={800}
+                    height={640}
                     className="max-h-full max-w-full object-contain object-center"
                     loading="lazy"
+                    decoding="async"
                   />
                 </figure>
               </div>

@@ -20,6 +20,10 @@ export default function Footer() {
         <div className="space-y-3 text-sm">
           <div className="flex items-start gap-2">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-mist-300" />
+            <span>Via Fabio Filzi, 51 · Cremona</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-mist-300" />
             <span>Via Guglielmo Oberdan 126 · Brescia</span>
           </div>
           <div className="flex items-start gap-2">
@@ -45,8 +49,14 @@ export default function Footer() {
           <Link to="/resources" className="hover:text-white">
             {t.nav.resources}
           </Link>
+          <Link to="/insights" className="hover:text-white">
+            {t.nav.insights}
+          </Link>
           <Link to="/contact" className="hover:text-white">
             {t.nav.contact}
+          </Link>
+          <Link to="/en" className="hover:text-white">
+            English
           </Link>
         </div>
       </div>

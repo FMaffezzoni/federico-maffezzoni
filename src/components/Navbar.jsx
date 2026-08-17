@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -8,12 +8,24 @@ const links = [
   ['/about', 'about'],
   ['/services', 'services'],
   ['/resources', 'resources'],
+  ['/insights', 'insights'],
   ['/contact', 'contact']
 ];
 
 export default function Navbar() {
   const { t, lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const switchLang = (next) => {
+    setLang(next);
+    if (next === 'en' && (location.pathname === '/' || location.pathname === '')) {
+      navigate('/en');
+    } else if (next === 'it' && (location.pathname === '/en' || location.pathname.startsWith('/en/'))) {
+      navigate('/');
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/50 bg-[#f7f6f3]/80 backdrop-blur-xl">
@@ -43,14 +55,14 @@ export default function Navbar() {
           <div className="flex rounded-full border border-mist-200 bg-white/70 p-1 text-xs font-semibold">
             <button
               type="button"
-              onClick={() => setLang('it')}
+              onClick={() => switchLang('it')}
               className={`rounded-full px-2.5 py-1 ${lang === 'it' ? 'bg-mist-700 text-white' : 'text-mist-700'}`}
             >
               IT
             </button>
             <button
               type="button"
-              onClick={() => setLang('en')}
+              onClick={() => switchLang('en')}
               className={`rounded-full px-2.5 py-1 ${lang === 'en' ? 'bg-mist-700 text-white' : 'text-mist-700'}`}
             >
               EN
@@ -63,7 +75,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="rounded-full border border-mist-200 bg-white/70 p-2 lg:hidden"
+            className="rounded-full border border-mist-200 bg-white/70 p-2 lg:hidden min-h-[44px] min-w-[44px]"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -81,7 +93,7 @@ export default function Navbar() {
                 to={to}
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
-                  `rounded-xl px-3 py-3 text-sm ${isActive ? 'bg-mist-700 text-white' : 'text-mist-800 hover:bg-mist-100'}`
+                  `rounded-xl px-3 py-3 text-sm min-h-[44px] ${isActive ? 'bg-mist-700 text-white' : 'text-mist-800 hover:bg-mist-100'}`
                 }
               >
                 {t.nav[key]}

@@ -5,16 +5,17 @@ import { assetUrl } from '../utils/assets';
 /**
  * Soft clinical photo frame.
  * Default portraits:
- *   public/images/federico.png  (home)
- *   public/images/Fede.png      (about)
+ *   public/images/federico.webp  (home)
+ *   public/images/Fede.webp      (about)
  */
 export default function PhotoPlaceholder({
   src,
-  alt = 'Dott. Federico Maffezzoni',
+  alt = 'Dott. Federico Maffezzoni - Psicologo Cremona e Brescia',
   className = '',
   label,
   aspect = 'portrait',
-  objectPosition = 'center center'
+  objectPosition = 'center center',
+  priority = false
 }) {
   const [failed, setFailed] = useState(false);
   const aspectClass = aspect === 'square' ? 'aspect-square' : 'aspect-[4/5]';
@@ -27,8 +28,13 @@ export default function PhotoPlaceholder({
         <img
           src={resolved}
           alt={alt}
+          width={800}
+          height={1000}
           className="h-full w-full object-cover"
           style={{ objectPosition }}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          fetchPriority={priority ? 'high' : 'low'}
           onError={() => setFailed(true)}
         />
       </div>

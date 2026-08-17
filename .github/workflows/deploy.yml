@@ -34,10 +34,10 @@ jobs:
           VITE_API_URL: ${{ vars.VITE_API_URL || secrets.VITE_API_URL }}
         run: |
           if [ -z "$VITE_API_URL" ]; then
-            echo "::error::VITE_API_URL is empty. Add it under Settings → Secrets and variables → Actions → Variables (e.g. https://your-app.onrender.com)"
-            exit 1
+            echo "::warning::VITE_API_URL is empty. The public site will use built-in copy; admin CMS will not load until you set the Render URL in Actions variables."
+          else
+            echo "Building with API: $VITE_API_URL"
           fi
-          echo "Building with API: $VITE_API_URL"
           npm run build
 
       # React Router SPA: refresh on /about etc. must serve index.html

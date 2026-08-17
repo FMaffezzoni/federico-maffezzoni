@@ -1,23 +1,37 @@
 import { FileDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import PhotoPlaceholder from '../components/PhotoPlaceholder';
 import BookButton from '../components/BookButton';
+import Breadcrumbs from '../components/Breadcrumbs';
+import SeoHead from '../seo/SeoHead';
 import { useLanguage } from '../i18n/LanguageContext';
 import { assetUrl } from '../utils/assets';
 
 export default function About() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const cvUrl = assetUrl(t.meta?.cvUrl || '/CV_Federico_Maffezzoni.pdf');
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: t.nav.about, path: '/about' }
+  ];
 
   return (
     <>
-      <PageHero title={t.about.title} subtitle={t.about.intro} />
+      <SeoHead
+        title={t.seo.aboutTitle}
+        description={t.seo.aboutDesc}
+        path="/about"
+        crumbs={crumbs}
+      />
+      <Breadcrumbs items={crumbs} />
+      <PageHero title={t.seo.aboutH1} subtitle={t.about.intro} />
       <section className="section-space pt-0">
         <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.3fr]">
           <div className="space-y-6">
             <PhotoPlaceholder
-              src={t.meta?.photoAbout || '/images/Fede.png'}
-              alt={t.brand}
+              src={t.meta?.photoAbout || '/images/Fede.webp'}
+              alt={t.seo.altAbout}
               label={t.cta.photoHint}
               className="shadow-soft"
             />
@@ -103,6 +117,17 @@ export default function About() {
                 </div>
               ))}
             </div>
+            <p className="mt-10 text-mist-700">
+              <Link to="/services" className="font-semibold text-mist-800 underline">
+                {lang === 'en'
+                  ? 'Explore psychology services in Cremona and Brescia'
+                  : 'Scopri i servizi di psicologia a Cremona e Brescia'}
+              </Link>
+              {' · '}
+              <Link to="/contact" className="font-semibold text-mist-800 underline">
+                {t.cta.contact}
+              </Link>
+            </p>
           </div>
         </div>
       </section>

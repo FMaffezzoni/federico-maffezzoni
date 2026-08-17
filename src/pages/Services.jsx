@@ -1,16 +1,48 @@
+import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import Breadcrumbs from '../components/Breadcrumbs';
+import SeoHead from '../seo/SeoHead';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Services() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const sections = t.conditions.sections || [];
   const flatItems = t.conditions.items || [];
+  const catalog = t.services.catalog || [];
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: t.nav.services, path: '/services' }
+  ];
 
   return (
     <>
-      <PageHero title={t.services.title} subtitle={t.services.subtitle} />
+      <SeoHead
+        title={t.seo.servicesTitle}
+        description={t.seo.servicesDesc}
+        path="/services"
+        crumbs={crumbs}
+      />
+      <Breadcrumbs items={crumbs} />
+      <PageHero title={t.seo.servicesH1} subtitle={t.services.subtitle} />
       <section className="section-space pt-0">
         <div className="container-page">
+          {catalog.length > 0 && (
+            <>
+              <h2 className="display mb-6 text-2xl text-mist-900 md:text-3xl">
+                {lang === 'en'
+                  ? 'Psychological services in Cremona, Brescia and online'
+                  : 'Servizi di psicologia a Cremona, Brescia e online'}
+              </h2>
+              <div className="mb-12 grid gap-4 md:grid-cols-2">
+              {catalog.map((item) => (
+                <article key={item.name} className="surface p-5 md:p-6">
+                  <h3 className="display text-xl text-mist-900">{item.name}</h3>
+                  <p className="mt-3 leading-relaxed text-mist-700">{item.text}</p>
+                </article>
+              ))}
+              </div>
+            </>
+          )}
           <p className="mb-8 max-w-3xl text-mist-600">{t.services.note}</p>
           <div className="overflow-hidden rounded-[1.75rem] border border-mist-200 bg-white/60 backdrop-blur">
             <ul className="divide-y divide-mist-100">
@@ -66,6 +98,17 @@ export default function Services() {
                   )}
             </div>
           </div>
+          <p className="mt-12 text-mist-700">
+            <Link to="/contact" className="font-semibold text-mist-800 underline">
+              {lang === 'en'
+                ? 'Book a session in Cremona, Brescia or online'
+                : 'Prenota a Cremona, Brescia o online'}
+            </Link>
+            {' · '}
+            <Link to="/insights" className="font-semibold text-mist-800 underline">
+              {t.nav.insights}
+            </Link>
+          </p>
         </div>
       </section>
     </>

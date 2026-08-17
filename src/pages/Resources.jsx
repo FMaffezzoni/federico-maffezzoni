@@ -1,14 +1,28 @@
 import { ExternalLink, PlayCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
+import Breadcrumbs from '../components/Breadcrumbs';
+import SeoHead from '../seo/SeoHead';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Resources() {
   const { t } = useLanguage();
   const mediaItems = t.media.items || [];
   const pubItems = t.publications.items || [];
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: t.nav.resources, path: '/resources' }
+  ];
 
   return (
     <>
+      <SeoHead
+        title={t.seo.resourcesTitle}
+        description={t.seo.resourcesDesc}
+        path="/resources"
+        crumbs={crumbs}
+      />
+      <Breadcrumbs items={crumbs} />
       <PageHero title={t.resources.title} subtitle={t.resources.subtitle} />
 
       <section className="section-space pt-0">
@@ -82,6 +96,15 @@ export default function Resources() {
               );
             })}
           </div>
+          <p className="mt-10 text-mist-700">
+            <Link to="/about" className="font-semibold text-mist-800 underline">
+              {t.nav.about}
+            </Link>
+            {' · '}
+            <Link to="/contact" className="font-semibold text-mist-800 underline">
+              {t.nav.contact}
+            </Link>
+          </p>
         </div>
       </section>
     </>

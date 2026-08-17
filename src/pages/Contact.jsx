@@ -1,13 +1,27 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero';
 import BookButton from '../components/BookButton';
+import Breadcrumbs from '../components/Breadcrumbs';
+import SeoHead from '../seo/SeoHead';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const crumbs = [
+    { name: 'Home', path: '/' },
+    { name: t.nav.contact, path: '/contact' }
+  ];
 
   return (
     <>
+      <SeoHead
+        title={t.seo.contactTitle}
+        description={t.seo.contactDesc}
+        path="/contact"
+        crumbs={crumbs}
+      />
+      <Breadcrumbs items={crumbs} />
       <PageHero title={t.contact.title} subtitle={t.contact.subtitle} />
       <section className="section-space pt-0">
         <div className="container-page grid gap-8 lg:grid-cols-[1fr_1fr]">
@@ -47,6 +61,13 @@ export default function Contact() {
                 </a>
               </div>
               <p className="mt-4 break-all text-sm text-mist-600">{t.contact.email}</p>
+              <p className="mt-4 text-sm text-mist-700">
+                <Link to="/services" className="font-semibold underline">
+                  {lang === 'en'
+                    ? 'See psychology services in Cremona and Brescia'
+                    : 'Scopri i servizi di psicologia a Cremona e Brescia'}
+                </Link>
+              </p>
             </div>
 
             <div className="surface p-6">

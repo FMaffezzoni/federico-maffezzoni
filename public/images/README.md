@@ -2,8 +2,8 @@
 
 | File | Used on |
 |------|---------|
-| `federico.png` | Home hero |
-| `Fede.png` | About page |
+| `federico.webp` | Home hero |
+| `Fede.webp` | About page |
 | `testimonials/*.png` | MioDottore review screenshots |
 
 CV PDF is served from `/public/CV_Federico_Maffezzoni.pdf` (download on About).

@@ -10,13 +10,13 @@ export default function Insights() {
     { name: 'Home', path: '/' },
     { name: lang === 'en' ? 'Insights' : 'Approfondimenti', path: '/insights' }
   ];
-  const posts = t.insights.posts;
+  const posts = t.insights?.posts || [];
 
   return (
     <>
       <SeoHead
-        title={t.seo.insightsTitle}
-        description={t.seo.insightsDesc}
+        title={t.seo?.insightsTitle || t.insights?.title}
+        description={t.seo?.insightsDesc || t.insights?.subtitle}
         path="/insights"
         crumbs={crumbs}
       />

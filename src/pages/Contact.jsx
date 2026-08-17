@@ -16,8 +16,8 @@ export default function Contact() {
   return (
     <>
       <SeoHead
-        title={t.seo.contactTitle}
-        description={t.seo.contactDesc}
+        title={t.seo?.contactTitle || t.contact.title}
+        description={t.seo?.contactDesc || t.contact.subtitle}
         path="/contact"
         crumbs={crumbs}
       />

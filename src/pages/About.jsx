@@ -19,19 +19,19 @@ export default function About() {
   return (
     <>
       <SeoHead
-        title={t.seo.aboutTitle}
-        description={t.seo.aboutDesc}
+        title={t.seo?.aboutTitle || t.about.title}
+        description={t.seo?.aboutDesc || t.about.intro}
         path="/about"
         crumbs={crumbs}
       />
       <Breadcrumbs items={crumbs} />
-      <PageHero title={t.seo.aboutH1} subtitle={t.about.intro} />
+      <PageHero title={t.seo?.aboutH1 || t.about.title} subtitle={t.about.intro} />
       <section className="section-space pt-0">
         <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.3fr]">
           <div className="space-y-6">
             <PhotoPlaceholder
               src={t.meta?.photoAbout || '/images/Fede.webp'}
-              alt={t.seo.altAbout}
+              alt={t.seo?.altAbout || t.brand}
               label={t.cta.photoHint}
               className="shadow-soft"
             />

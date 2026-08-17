@@ -15,13 +15,13 @@ export default function Home() {
   const location = useLocation();
   const isEn = location.pathname === '/en' || lang === 'en';
   const faqs = DEFAULT_FAQS[isEn ? 'en' : 'it'];
-  const seo = t.seo;
+  const seo = t.seo || {};
 
   return (
     <>
       <SeoHead
-        title={isEn ? seo.enTitle : seo.homeTitle}
-        description={isEn ? seo.enDesc : seo.homeDesc}
+        title={isEn ? seo.enTitle || t.home?.title : seo.homeTitle || t.home?.title}
+        description={isEn ? seo.enDesc || t.home?.subtitle : seo.homeDesc || t.home?.subtitle}
         path={location.pathname === '/en' ? '/en' : '/'}
         faqs={faqs}
         crumbs={[{ name: 'Home', path: '/' }]}
@@ -36,7 +36,7 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <p className="eyebrow mb-5">{t.home.eyebrow}</p>
             <h1 className="display text-4xl leading-[1.08] text-slateink-900 sm:text-5xl lg:text-[2.85rem] lg:leading-[1.12]">
-              {isEn ? seo.enH1 : seo.homeH1}
+              {isEn ? seo.enH1 || t.home?.title : seo.homeH1 || t.home?.title}
             </h1>
             <p className="mt-3 text-lg font-medium text-mist-700 md:text-xl">{t.role}</p>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-mist-800 md:text-xl">{t.home.subtitle}</p>
@@ -59,7 +59,7 @@ export default function Home() {
           >
             <PhotoPlaceholder
               src={t.meta?.photoHome || '/images/federico.webp'}
-              alt={t.seo.altHome}
+              alt={t.seo?.altHome || t.brand}
               label={t.cta.photoHint}
               className="shadow-soft"
               objectPosition="72% 32%"

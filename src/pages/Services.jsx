@@ -17,13 +17,13 @@ export default function Services() {
   return (
     <>
       <SeoHead
-        title={t.seo.servicesTitle}
-        description={t.seo.servicesDesc}
+        title={t.seo?.servicesTitle || t.services.title}
+        description={t.seo?.servicesDesc || t.services.subtitle}
         path="/services"
         crumbs={crumbs}
       />
       <Breadcrumbs items={crumbs} />
-      <PageHero title={t.seo.servicesH1} subtitle={t.services.subtitle} />
+      <PageHero title={t.seo?.servicesH1 || t.services.title} subtitle={t.services.subtitle} />
       <section className="section-space pt-0">
         <div className="container-page">
           {catalog.length > 0 && (

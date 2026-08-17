@@ -17,8 +17,8 @@ export default function Resources() {
   return (
     <>
       <SeoHead
-        title={t.seo.resourcesTitle}
-        description={t.seo.resourcesDesc}
+        title={t.seo?.resourcesTitle || t.resources.title}
+        description={t.seo?.resourcesDesc || t.resources.subtitle}
         path="/resources"
         crumbs={crumbs}
       />

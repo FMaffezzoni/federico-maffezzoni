@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /federico-maffezzoni/admin
+Disallow: /federico-maffezzoni/admin/
+
+Sitemap: https://fmaffezzoni.github.io/federico-maffezzoni/sitemap.xml

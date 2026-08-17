@@ -74,8 +74,8 @@ If you uploaded manually before adding the workflow, upload these new files too:
 
 ## Photos & CV
 
-- Home: `public/images/federico.png`
-- About: `public/images/Fede.png`
+- Home: `public/images/federico.webp`
+- About: `public/images/Fede.webp`
 - CV: `public/CV_Federico_Maffezzoni.pdf` (download button on About)
 
 You can also replace paths from **Admin → Profile & photos**.

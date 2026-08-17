@@ -8,6 +8,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
+import Insights from './pages/Insights';
 import { AdminAuthProvider, RequireAdmin } from './admin/AdminAuth';
 import AdminLayout from './admin/AdminLayout';
 import AdminLogin from './admin/AdminLogin';
@@ -30,8 +31,8 @@ import TestimonialsEditor from './admin/pages/TestimonialsEditor';
 export default function App() {
   return (
     <ContentProvider>
-      <LanguageProvider>
-        <BrowserRouter basename={routerBasename}>
+      <BrowserRouter basename={routerBasename}>
+        <LanguageProvider>
           <AdminAuthProvider>
             <Routes>
               <Route path="/admin/login" element={<AdminLogin />} />
@@ -62,9 +63,11 @@ export default function App() {
 
               <Route element={<Layout />}>
                 <Route index element={<Home />} />
+                <Route path="en" element={<Home />} />
                 <Route path="about" element={<About />} />
                 <Route path="services" element={<Services />} />
                 <Route path="resources" element={<Resources />} />
+                <Route path="insights" element={<Insights />} />
                 <Route path="contact" element={<Contact />} />
                 <Route path="approach" element={<Navigate to="/about" replace />} />
                 <Route path="conditions" element={<Navigate to="/services" replace />} />
@@ -74,8 +77,8 @@ export default function App() {
               </Route>
             </Routes>
           </AdminAuthProvider>
-        </BrowserRouter>
-      </LanguageProvider>
+        </LanguageProvider>
+      </BrowserRouter>
     </ContentProvider>
   );
 }

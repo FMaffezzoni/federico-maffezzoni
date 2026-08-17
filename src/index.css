@@ -41,11 +41,11 @@ body {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-mist-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-mist-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-mist-500 focus-visible:ring-offset-2;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-mist-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-mist-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-mist-500 focus-visible:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-mist-300 bg-white/60 px-6 py-3 text-sm font-semibold text-mist-800 backdrop-blur transition hover:border-mist-500 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-mist-400 focus-visible:ring-offset-2;
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-mist-300 bg-white/60 px-6 py-3 text-sm font-semibold text-mist-800 backdrop-blur transition hover:border-mist-500 hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-mist-400 focus-visible:ring-offset-2;
   }
 
   .surface {

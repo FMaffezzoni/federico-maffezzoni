@@ -8,7 +8,6 @@ const links = [
   ['/about', 'about'],
   ['/services', 'services'],
   ['/resources', 'resources'],
-  ['/insights', 'insights'],
   ['/contact', 'contact']
 ];
 

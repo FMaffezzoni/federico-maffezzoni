@@ -128,10 +128,6 @@ export const DEFAULT_FAQS = {
     {
       q: 'Il Dott. Maffezzoni parla inglese?',
       a: 'Sì. Dr. Federico Maffezzoni is an English speaking psychologist in Italy and an Italian psychologist offering sessions in English for expats and international clients, in person and online.'
-    },
-    {
-      q: 'Cerco uno psichiatra a Brescia o Cremona. Il Dott. Maffezzoni è psichiatra?',
-      a: 'No: il Dott. Federico Maffezzoni è psicologo e psicoterapeuta, non psichiatra. Chi cerca uno psichiatra a Brescia o uno psichiatra a Cremona per un supporto psicologico (ansia, umore, relazioni) può comunque rivolgersi a un psicoterapeuta. Per prescrizione di farmaci è necessario un medico psichiatra.'
     }
   ],
   en: [
@@ -146,10 +142,6 @@ export const DEFAULT_FAQS = {
     {
       q: 'Is Dr. Maffezzoni an English speaking psychologist in Italy?',
       a: 'Yes. He is an Italian psychologist and English speaking psychologist in Italy, offering in-person and online therapy for expats and international clients.'
-    },
-    {
-      q: 'Are you a psychiatrist in Brescia or Cremona?',
-      a: 'No. Dr. Federico Maffezzoni is a psychologist and psychotherapist, not a psychiatrist. People searching for a psychiatrist in Brescia or Cremona who need talking therapy can still book a psychologist. Medication is prescribed by a medical psychiatrist.'
     }
   ]
 };

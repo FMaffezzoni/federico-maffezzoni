@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Camera } from 'lucide-react';
 import { assetUrl } from '../utils/assets';
 
 /**
  * Soft clinical photo frame.
  * Default portraits:
- *   public/images/federico.webp  (home)
- *   public/images/Fede.webp      (about)
+ *   public/images/federico.png  (home)
+ *   public/images/Fede.png      (about)
  */
+function nextFallback(path) {
+  if (!path) return '';
+  if (/\.webp$/i.test(path)) return path.replace(/\.webp$/i, '.png');
+  if (/\.png$/i.test(path)) return path.replace(/\.png$/i, '.jpg');
+  return '';
+}
+
 export default function PhotoPlaceholder({
   src,
   alt = 'Dott. Federico Maffezzoni - Psicologo Cremona e Brescia',
@@ -17,10 +24,25 @@ export default function PhotoPlaceholder({
   objectPosition = 'center center',
   priority = false
 }) {
+  const [currentSrc, setCurrentSrc] = useState(src);
   const [failed, setFailed] = useState(false);
   const aspectClass = aspect === 'square' ? 'aspect-square' : 'aspect-[4/5]';
-  const resolved = assetUrl(src);
+  const resolved = assetUrl(currentSrc || src);
   const showImage = Boolean(resolved) && !failed;
+
+  useEffect(() => {
+    setCurrentSrc(src);
+    setFailed(false);
+  }, [src]);
+
+  const handleError = () => {
+    const fallback = nextFallback(currentSrc || src);
+    if (fallback && fallback !== currentSrc) {
+      setCurrentSrc(fallback);
+      return;
+    }
+    setFailed(true);
+  };
 
   if (showImage) {
     return (
@@ -35,7 +57,7 @@ export default function PhotoPlaceholder({
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
           fetchPriority={priority ? 'high' : 'low'}
-          onError={() => setFailed(true)}
+          onError={handleError}
         />
       </div>
     );

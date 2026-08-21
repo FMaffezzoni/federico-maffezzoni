@@ -9,6 +9,7 @@ export default function AdminForgotPassword() {
   const [message, setMessage] = useState('');
   const [resetUrl, setResetUrl] = useState('');
   const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ export default function AdminForgotPassword() {
     setError('');
     setMessage('');
     setResetUrl('');
+    setCopied(false);
     try {
       const data = await forgotPassword(email);
       setMessage(data.message || 'Check your email for a reset link.');
@@ -27,14 +29,26 @@ export default function AdminForgotPassword() {
     }
   };
 
+  const copyLink = async () => {
+    if (!resetUrl) return;
+    try {
+      await navigator.clipboard.writeText(resetUrl);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center px-4 py-12">
       <div className="w-full max-w-md rounded-[1.75rem] border border-mist-200 bg-white/80 p-8 shadow-soft backdrop-blur">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-mist-500">Admin access</p>
         <h1 className="mt-2 font-display text-3xl text-mist-900">Forgot password</h1>
         <p className="mt-2 text-sm text-mist-600">
-          Enter the admin email. If it matches, you will receive a reset link (or find it in the server logs
-          if email is not configured yet).
+          Enter the admin email (
+          <span className="font-medium text-mist-800">dott.federicomaffezzoni@gmail.com</span>
+          ). If it matches, you get a reset link by email — or on this page when email is not
+          configured on the server.
         </p>
 
         <form onSubmit={onSubmit} className="mt-8 space-y-4">
@@ -51,12 +65,18 @@ export default function AdminForgotPassword() {
           {error && <p className="text-sm text-red-700">{error}</p>}
           {message && <p className="text-sm text-mist-700">{message}</p>}
           {resetUrl && (
-            <p className="break-all rounded-xl bg-mist-50 p-3 text-xs text-mist-800">
-              Reset link (temporary):{' '}
-              <a href={resetUrl} className="font-semibold text-mist-700 underline">
-                {resetUrl}
+            <div className="space-y-3 rounded-xl border border-mist-200 bg-mist-50 p-4">
+              <p className="text-sm font-semibold text-mist-900">Your reset link (1 hour)</p>
+              <a
+                href={resetUrl}
+                className="block break-all text-sm font-semibold text-mist-700 underline"
+              >
+                Open reset page
               </a>
-            </p>
+              <button type="button" onClick={copyLink} className="btn-secondary w-full text-sm">
+                {copied ? 'Copied' : 'Copy link'}
+              </button>
+            </div>
           )}
           <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-60">
             {loading ? 'Sending…' : 'Send reset link'}

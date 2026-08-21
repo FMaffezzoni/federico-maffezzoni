@@ -1,7 +1,7 @@
 import { useDraft } from '../DraftContext';
 import { BilingualField, SectionCard } from '../components/fields';
 
-const NAV_KEYS = ['about', 'services', 'resources', 'contact'];
+const NAV_KEYS = ['about', 'services', 'resources', 'insights', 'contact'];
 
 const CTA_KEYS = [
   'book',
@@ -31,7 +31,7 @@ export default function LabelsEditor() {
           <BilingualField
             key={key}
             label={key}
-            value={draft.nav[key]}
+            value={draft.nav[key] || { it: '', en: '' }}
             onChange={(v) => update((d) => ({ ...d, nav: { ...d.nav, [key]: v } }))}
           />
         ))}

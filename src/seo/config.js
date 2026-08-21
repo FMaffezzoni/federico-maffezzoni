@@ -1,16 +1,16 @@
-/** Canonical site config for GitHub Pages (project site). */
+/** Canonical site config. Live site: https://federicomaffezzoni.it */
 export const SITE = {
   origin: 'https://fmaffezzoni.github.io',
   basePath: '/federico-maffezzoni',
-  customDomain: '', // e.g. 'https://www.federicomaffezzoni.it' when ready
+  customDomain: 'https://federicomaffezzoni.it',
   phoneDisplay: '0372 183 5363',
   phoneTel: '+3903721835363',
   email: 'dott.federicomaffezzoni@gmail.com',
   miodottore: 'https://www.miodottore.it/profilo/federico-maffezzoni',
-  ogImagePath: '/images/federico-og.jpg',
+  ogImagePath: '/images/federico.png',
   cremonaAddress: 'Via Fabio Filzi, 51, Cremona 26100',
   bresciaAddress: 'Via Guglielmo Oberdan 126, Brescia 25128 (Poliambulatorio Oberdan)',
-  googleVerification: 'INSERT_GOOGLE_VERIFICATION_CODE',
+  googleVerification: 'WmHwpOeC3_lMzNVwkcen_Op6eiTTpMDcXUhbZQ6TCFA',
   bingVerification: 'INSERT_BING_VERIFICATION_CODE'
 };
 
@@ -28,9 +28,8 @@ export function absoluteUrl(path = '/') {
 export function absoluteAsset(path) {
   if (!path) return absoluteUrl(SITE.ogImagePath);
   if (/^https?:\/\//i.test(path)) return path;
-  const base = import.meta.env.BASE_URL || `${SITE.basePath}/`;
-  const clean = path.replace(/^\//, '');
-  return `${SITE.origin}${base}${clean}`.replace(/([^:]\/)\/+/g, '$1');
+  const clean = path.startsWith('/') ? path : `/${path}`;
+  return `${siteUrl()}${clean}`;
 }
 
 export const PUBLIC_PATHS = [

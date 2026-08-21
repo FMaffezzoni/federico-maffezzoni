@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://fmaffezzoni.github.io/federico-maffezzoni/</loc>
+    <loc>https://federicomaffezzoni.it/</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="it" href="https://fmaffezzoni.github.io/federico-maffezzoni/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://fmaffezzoni.github.io/federico-maffezzoni/en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://fmaffezzoni.github.io/federico-maffezzoni/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://federicomaffezzoni.it/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://federicomaffezzoni.it/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://federicomaffezzoni.it/" />
   </url>
   <url>
-    <loc>https://fmaffezzoni.github.io/federico-maffezzoni/about</loc>
+    <loc>https://federicomaffezzoni.it/about</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://fmaffezzoni.github.io/federico-maffezzoni/services</loc>
+    <loc>https://federicomaffezzoni.it/services</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://fmaffezzoni.github.io/federico-maffezzoni/resources</loc>
+    <loc>https://federicomaffezzoni.it/resources</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://fmaffezzoni.github.io/federico-maffezzoni/insights</loc>
+    <loc>https://federicomaffezzoni.it/insights</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fmaffezzoni.github.io/federico-maffezzoni/contact</loc>
+    <loc>https://federicomaffezzoni.it/contact</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fmaffezzoni.github.io/federico-maffezzoni/en</loc>
+    <loc>https://federicomaffezzoni.it/en</loc>
     <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://fmaffezzoni.github.io/federico-maffezzoni/en" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://fmaffezzoni.github.io/federico-maffezzoni/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://federicomaffezzoni.it/en" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://federicomaffezzoni.it/" />
   </url>
 </urlset>

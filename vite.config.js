@@ -1,8 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// GitHub Pages project site: https://<user>.github.io/federico-maffezzoni/
-const base = '/';
+// Custom domain (federicomaffezzoni.it) is served at the site root.
+// The old project path /federico-maffezzoni/ is only used if CUSTOM_DOMAIN=false.
+const useCustomDomain = process.env.CUSTOM_DOMAIN !== 'false';
+const base =
+  process.env.GITHUB_PAGES === 'true' && !useCustomDomain ? '/federico-maffezzoni/' : '/';
 
 export default defineConfig({
   base,

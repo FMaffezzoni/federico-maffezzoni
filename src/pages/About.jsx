@@ -30,7 +30,7 @@ export default function About() {
         <div className="container-page grid gap-10 lg:grid-cols-[0.9fr_1.3fr]">
           <div className="space-y-6">
             <PhotoPlaceholder
-              src={t.meta?.photoAbout || '/images/Fede.webp'}
+              src={t.meta?.photoAbout || '/images/Fede.png'}
               alt={t.seo?.altAbout || t.brand}
               label={t.cta.photoHint}
               className="shadow-soft"

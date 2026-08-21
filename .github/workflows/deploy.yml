@@ -30,6 +30,7 @@ jobs:
       - name: Build for GitHub Pages
         env:
           GITHUB_PAGES: 'true'
+          CUSTOM_DOMAIN: 'true'
           # Prefer Actions → Variables; Secrets also accepted as fallback
           VITE_API_URL: ${{ vars.VITE_API_URL || secrets.VITE_API_URL }}
         run: |

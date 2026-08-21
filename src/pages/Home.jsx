@@ -58,7 +58,7 @@ export default function Home() {
             className="relative"
           >
             <PhotoPlaceholder
-              src={t.meta?.photoHome || '/images/federico.webp'}
+              src={t.meta?.photoHome || '/images/federico.png'}
               alt={t.seo?.altHome || t.brand}
               label={t.cta.photoHint}
               className="shadow-soft"

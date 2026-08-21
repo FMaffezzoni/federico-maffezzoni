@@ -18,8 +18,8 @@ export function buildDefaultContent() {
       email: translations.it.contact.email,
       phone: translations.it.contact.phone,
       bookingUrl: MIODOTTORE_URL,
-      photoHome: '/images/federico.webp',
-      photoAbout: '/images/Fede.webp',
+      photoHome: '/images/federico.png',
+      photoAbout: '/images/Fede.png',
       cvUrl: '/CV_Federico_Maffezzoni.pdf'
     },
     nav: {

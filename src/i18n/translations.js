@@ -7,7 +7,8 @@ export const translations = {
       services: 'Prestazioni',
       resources: 'Media e ricerca',
       insights: 'Approfondimenti',
-      contact: 'Contatti'
+      contact: 'Contatti',
+      privacy: 'Informativa privacy e cookie'
     },
     cta: {
       book: 'Prenota un colloquio',
@@ -371,7 +372,10 @@ export const translations = {
         'Dr. Federico Maffezzoni - English speaking psychologist and psychotherapist in Italy. Online consultations available. Based in Cremona and Brescia. Book on MioDottore.',
       enH1: 'Dr. Federico Maffezzoni - Psychologist and Psychotherapist in Italy',
       altHome: 'Dott. Federico Maffezzoni - Psicologo Cremona',
-      altAbout: 'Studio di Psicologia a Brescia - Dott. Federico Maffezzoni'
+      altAbout: 'Studio di Psicologia a Brescia - Dott. Federico Maffezzoni',
+      privacyTitle: 'Informativa privacy e cookie | Dott. Federico Maffezzoni',
+      privacyDesc:
+        'Informativa privacy e cookie del sito federicomaffezzoni.it ai sensi del GDPR. Cookie tecnici, contatti e diritti degli interessati.'
     },
     insights: {
       title: 'Approfondimenti',
@@ -416,7 +420,8 @@ export const translations = {
       services: 'Services',
       resources: 'Media & Research',
       insights: 'Insights',
-      contact: 'Contact'
+      contact: 'Contact',
+      privacy: 'Privacy and cookie notice'
     },
     cta: {
       book: 'Book a session',
@@ -760,7 +765,10 @@ export const translations = {
         'Dr. Federico Maffezzoni - English speaking psychologist and psychotherapist in Italy. Online consultations available. Based in Cremona and Brescia. Book on MioDottore.',
       enH1: 'Dr. Federico Maffezzoni - Psychologist and Psychotherapist in Italy',
       altHome: 'Dr. Federico Maffezzoni - Psychologist Cremona',
-      altAbout: 'Psychology practice in Brescia - Dr. Federico Maffezzoni'
+      altAbout: 'Psychology practice in Brescia - Dr. Federico Maffezzoni',
+      privacyTitle: 'Privacy and cookie notice | Dr. Federico Maffezzoni',
+      privacyDesc:
+        'Privacy and cookie notice for federicomaffezzoni.it under the GDPR. Technical cookies, contact data and data-subject rights.'
     },
     insights: {
       title: 'Insights',

@@ -55,13 +55,19 @@ export default function Footer() {
           <Link to="/contact" className="hover:text-white">
             {t.nav.contact}
           </Link>
+          <Link to="/privacy" className="hover:text-white">
+            {t.nav.privacy}
+          </Link>
           <Link to="/en" className="hover:text-white">
             English
           </Link>
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-mist-300">
-        © {year} {t.brand}. {t.footer.rights}
+        © {year} {t.brand}. {t.footer.rights}{' '}
+        <Link to="/privacy" className="underline hover:text-white">
+          {t.nav.privacy}
+        </Link>
       </div>
     </footer>
   );

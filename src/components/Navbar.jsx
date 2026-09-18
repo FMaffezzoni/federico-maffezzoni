@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import BookButton from './BookButton';
+import { assetUrl } from '../utils/assets';
 
 const links = [
   ['/about', 'about'],
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const logoSrc = assetUrl('/images/logo.png');
 
   const switchLang = (next) => {
     setLang(next);
@@ -29,9 +31,19 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/50 bg-[#f7f6f3]/80 backdrop-blur-xl">
       <div className="container-page flex items-center justify-between gap-4 py-4">
-        <Link to="/" className="min-w-0" onClick={() => setOpen(false)}>
-          <div className="display text-lg leading-tight text-mist-800 sm:text-xl">{t.brand}</div>
-          <div className="text-xs text-mist-600 sm:text-sm">{t.role}</div>
+        <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3" onClick={() => setOpen(false)}>
+          <img
+            src={logoSrc}
+            alt=""
+            width={88}
+            height={48}
+            className="h-9 w-auto max-w-[4.5rem] shrink-0 object-contain sm:h-10 sm:max-w-[5.25rem]"
+            decoding="async"
+          />
+          <span className="min-w-0">
+            <span className="display block text-lg leading-tight text-mist-800 sm:text-xl">{t.brand}</span>
+            <span className="block text-xs text-mist-600 sm:text-sm">{t.role}</span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

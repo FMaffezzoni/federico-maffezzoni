@@ -39,5 +39,6 @@ export const PUBLIC_PATHS = [
   { path: '/resources', changefreq: 'monthly', priority: '0.7' },
   { path: '/insights', changefreq: 'monthly', priority: '0.8' },
   { path: '/contact', changefreq: 'monthly', priority: '0.8' },
+  { path: '/privacy', changefreq: 'yearly', priority: '0.4' },
   { path: '/en', changefreq: 'weekly', priority: '0.9' }
 ];
